@@ -1,0 +1,41 @@
+{
+	"name": "DestinationDataset_nje",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "InvoiceNumber",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "VendorName",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "InvoiceDate",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "InvoiceAmount",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Invoices]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
