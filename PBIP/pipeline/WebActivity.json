@@ -18,6 +18,25 @@
 					"url": "https://api.postalpincode.in/pincode/500011",
 					"method": "GET"
 				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('Web1').output.value[0].Response.Message",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
