@@ -30,7 +30,14 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "output",
+					"value": {
+						"value": "@json(activity('Web1').output.Response)[0]",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
