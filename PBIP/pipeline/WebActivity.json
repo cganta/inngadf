@@ -41,9 +41,86 @@
 				"typeProperties": {
 					"storedProcedureName": "[dbo].[USP_Insert_Postal_Branch_Details]",
 					"storedProcedureParameters": {
+						"Block": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Block",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
 						"BranchDesc": {
 							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Description",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"BranchName": {
+							"value": {
 								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Name",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"BranchType": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].BranchType",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Circle": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Circle",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Country": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Country",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"DeliveryStatus": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].DeliveryStatus",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"District": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].District",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Division": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Division",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Pincode": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Pincode",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Region": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Region",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"State": {
+							"value": {
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].State",
 								"type": "Expression"
 							},
 							"type": "String"
