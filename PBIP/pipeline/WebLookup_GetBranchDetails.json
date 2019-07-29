@@ -133,6 +133,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"PinCode": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"output": {
 				"type": "String"
