@@ -15,7 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://api.postalpincode.in/pincode/500011",
+					"url": {
+						"value": "@concat('https://api.postalpincode.in/pincode/',pipeline().parameters.PinCode)",
+						"type": "Expression"
+					},
 					"method": "GET"
 				}
 			},
@@ -135,7 +138,8 @@
 		],
 		"parameters": {
 			"PinCode": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "500011"
 			}
 		},
 		"variables": {
