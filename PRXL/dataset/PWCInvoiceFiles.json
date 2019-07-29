@@ -1,0 +1,42 @@
+{
+	"name": "PWCInvoiceFiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "PWC_Invoices_Sample.tsv",
+				"folderPath": "PWCInvoices",
+				"container": "blobcntnrinvoices"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "InvoiceNubmer",
+				"type": "String"
+			},
+			{
+				"name": "VendorName",
+				"type": "String"
+			},
+			{
+				"name": "PostingDate",
+				"type": "String"
+			},
+			{
+				"name": "InvoiceAmount",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

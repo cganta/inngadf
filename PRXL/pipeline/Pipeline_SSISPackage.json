@@ -1,0 +1,96 @@
+{
+	"name": "Pipeline_SSISPackage",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS Package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "DWH_Project/PRXL_DWH/Package1.dtsx",
+						"type": "SSISDB"
+					},
+					"environmentPath": null,
+					"connectVia": {
+						"referenceName": "SSISHostedIntegrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic"
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/bd08fa83-e892-4ad3-9f1c-2940e77392c6/resourceGroups/RG-USEAST-DEMO-PRXL/providers/Microsoft.DataFactory/factories/adf2prxl /integrationRuntimes/SSISHostedIntegrationRuntime1/start?api-version=2018-06-01",
+					"method": "POST",
+					"body": {
+						"message": "Start my IR"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			},
+			{
+				"name": "WebActivity1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute SSIS Package1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/sqlsrv-useast-prepord.database.windows.net/start?api-version=2018-06-01",
+					"method": "POST",
+					"body": {
+						"message": "Stop my IR"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

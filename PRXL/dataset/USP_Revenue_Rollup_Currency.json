@@ -1,0 +1,13 @@
+{
+	"name": "USP_Revenue_Rollup_Currency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "NJ10LTNBANDI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "AzureDataLakeStoreInvoices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorePRXL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureDataLakeStoreLocation",
+				"folderPath": "Invoices"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

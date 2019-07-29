@@ -1,0 +1,165 @@
+{
+	"name": "ContitionalActivity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceDataset_0uk",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"exists",
+						"size"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSetting",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSetting"
+					}
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@and(activity('Get Metadata1').output.exists,greater(activity('Get Metadata1').output.size,0))",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "blobcntnrinvoices//EmployeeInfo.csv"
+								},
+								{
+									"name": "Destination",
+									"value": "[dbo].[UserInfo]"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSetting",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSetting",
+										"skipLineCount": 0
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": "truncate table UserInfo"
+								},
+								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
+								"redirectIncompatibleRowSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "blobcntnrinvoices/error_files"
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "Email",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Email",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "MobileNo",
+												"type": "String"
+											},
+											"sink": {
+												"name": "MobileNo",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "FirstName",
+												"type": "String"
+											},
+											"sink": {
+												"name": "FirstName",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "LastName",
+												"type": "String"
+											},
+											"sink": {
+												"name": "LastName",
+												"type": "String"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_0uk",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_0uk",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

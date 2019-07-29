@@ -1,0 +1,36 @@
+{
+	"name": "TBL_Revenue_Rollup_Currency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SalesAmount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TotalProductCost",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "WeekNumberOfYear",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SalesTerritoryCountry",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[TBL_Revenue_Rollup_Currency]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
