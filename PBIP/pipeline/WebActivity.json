@@ -33,7 +33,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@activity('Web1').output.value[0].Response.Message",
+						"value": "@json(activity('Web1').output.Response)[0]",
 						"type": "Expression"
 					}
 				}
