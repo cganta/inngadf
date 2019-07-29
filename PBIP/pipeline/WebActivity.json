@@ -20,8 +20,8 @@
 				}
 			},
 			{
-				"name": "If Condition1",
-				"type": "IfCondition",
+				"name": "Set Variable1",
+				"type": "SetVariable",
 				"dependsOn": [
 					{
 						"activity": "Web1",
@@ -30,15 +30,14 @@
 						]
 					}
 				],
-				"userProperties": [],
-				"typeProperties": {
-					"expression": {
-						"value": "@json(activity('Web1').output.Response)[0]",
-						"type": "Expression"
-					}
-				}
+				"userProperties": []
 			}
 		],
+		"variables": {
+			"output": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
