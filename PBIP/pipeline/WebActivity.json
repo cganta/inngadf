@@ -43,7 +43,7 @@
 					"storedProcedureParameters": {
 						"BranchDesc": {
 							"value": {
-								"value": "@json(activity('Web1').output.Response)[0].Message",
+								"value": "@json(activity('Web1').output.Response)[0].PostOffice[0].Name",
 								"type": "Expression"
 							},
 							"type": "String"
