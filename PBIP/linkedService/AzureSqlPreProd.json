@@ -1,0 +1,20 @@
+{
+	"name": "AzureSqlPreProd",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=sqlsrv-useast-prepord.database.windows.net;Initial Catalog=CMS;User ID=preprod",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sqlsrvpreprod",
+				"secretVersion": "2d00bdb159c4423e9ff2adcca917c403"
+			}
+		}
+	}
+}
