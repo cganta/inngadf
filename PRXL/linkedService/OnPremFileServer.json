@@ -1,0 +1,17 @@
+{
+	"name": "OnPremFileServer",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "\\\\NJ10-LT-NBANDI\\Subscriptions",
+			"userId": "stgusa\\nagarjuna.bandi",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3YWM5Y2U4ZS03MmIyLTQxZjgtODQxOS0wZDY2NTQ2OTAwZjAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfHostedIntegrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

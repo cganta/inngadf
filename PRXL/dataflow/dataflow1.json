@@ -1,0 +1,34 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PWCInvoiceFiles",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTablePWCInvoices",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\tInvoiceNubmer as string,\n\t\tVendorName as string,\n\t\tPostingDate as string,\n\t\tInvoiceAmount as float\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1\nsource1 derive(InvoiceAmountUSD = abs(InvoiceAmount)/68) ~> DerivedColumn1\nDerivedColumn1 split(InvoiceAmountUSD>=1000,\n\tdisjoint: false) ~> ConditionalSplit1@(Above1KUSD, Default)\nConditionalSplit1@Above1KUSD sink(input(\n\t\tInvoiceNubmer as string,\n\t\tVendorName as string,\n\t\tPostingDate as date,\n\t\tInvoiceAmount as double,\n\t\tID as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'table',\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tmapColumn(\n\t\tInvoiceNubmer,\n\t\tVendorName,\n\t\tInvoiceAmount = InvoiceAmountUSD,\n\t\tPostingDate\n\t)) ~> sink1\nConditionalSplit1@Default sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> sink2"
+		}
+	}
+}

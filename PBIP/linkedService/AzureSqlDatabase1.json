@@ -6,7 +6,7 @@
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
 			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=sqlsrv-useast-dev-pbip.database.windows.net;initial catalog=DemoDB;user id=arjuna",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERi1VU0VBU1QtREVWLVBCSVBfYWIxZDY3OTAtOGQxYi00Y2QwLTlmNDQtZWQ5OTFjN2Y0MWVhIg0KfQ=="
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERlRFU1RHSVRfNThhNjIxMDItODFkNC00NzQ0LWFlZTQtNzcwNzMwN2Y2YzkwIg0KfQ=="
 		}
 	}
 }

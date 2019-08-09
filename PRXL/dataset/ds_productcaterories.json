@@ -1,0 +1,23 @@
+{
+	"name": "ds_productcaterories",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_storageaccountiptm",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "AdventureWorks",
+				"container": "blobcontnritteam"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,39 @@
+{
+	"name": "AzureSqlTablePWCInvoices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "InvoiceNubmer",
+				"type": "varchar"
+			},
+			{
+				"name": "VendorName",
+				"type": "varchar"
+			},
+			{
+				"name": "PostingDate",
+				"type": "date"
+			},
+			{
+				"name": "InvoiceAmount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[PWC_Invoices]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

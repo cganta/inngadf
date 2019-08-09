@@ -1,0 +1,105 @@
+{
+	"name": "Pipeline_Copy_OnpremMultipleFiles",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSetting",
+							"recursive": true,
+							"wildcardFileName": "*.tsv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSetting"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSetting"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSetting",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "InvoiceNumber",
+									"type": "String"
+								},
+								"sink": {
+									"name": "InvoiceNubmer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VendorName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VendorName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "InvoiceDate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PostingDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "InvoiceAmount",
+									"type": "String"
+								},
+								"sink": {
+									"name": "InvoiceAmount",
+									"type": "Double"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "OnpremFileServerDataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PWCInvoiceFiles",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
