@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-USEAST-DEV-PBIP"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStore1_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://pbipdatalake.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+			"value": "18983365-f127-4d95-93c2-df5d3e27c392"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"value": "fef66f03-9a3c-4799-8e31-a8680f9dd0de"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"value": "bd08fa83-e892-4ad3-9f1c-2940e77392c6"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"value": "RG-USEAST-DEV-PBIP"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://pbipkeyvault.vault.azure.net/"
+		},
+		"SelfHostedIntegrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/bd08fa83-e892-4ad3-9f1c-2940e77392c6/resourcegroups/RG-USEAST-DEMO-PRXL/providers/Microsoft.DataFactory/factories/adf2prxl/integrationruntimes/SelfHostedIntegrationRuntime1"
+		}
+	}
+}
