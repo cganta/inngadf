@@ -1,0 +1,23 @@
+{
+	"name": "AzureDataLakeStore2",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://pbipdatalake.azuredatalakestore.net/webhdfs/v1",
+			"servicePrincipalId": "ee6ebf69-ac74-497f-89f2-c4ce90b8f088",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "adappadlstorage",
+				"secretVersion": "caa4309253bf436081832ff72eb28c12"
+			},
+			"tenant": "fef66f03-9a3c-4799-8e31-a8680f9dd0de",
+			"subscriptionId": "bd08fa83-e892-4ad3-9f1c-2940e77392c6",
+			"resourceGroupName": "RG-USEAST-DEV-PBIP"
+		}
+	}
+}
