@@ -60,7 +60,17 @@
 									"referenceName": "CopyBlobToTable",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"Pram_BlobName": {
+										"value": "@activity('GetMetadata1').output.itemName",
+										"type": "Expression"
+									},
+									"Pram_BlobSize": {
+										"value": "@activity('GetMetadata1').output.size",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
