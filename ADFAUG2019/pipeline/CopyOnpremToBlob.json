@@ -16,7 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource"
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select * from tblCopyBlobList"
 					},
 					"dataset": {
 						"referenceName": "DS_tblCopyBlobList",
