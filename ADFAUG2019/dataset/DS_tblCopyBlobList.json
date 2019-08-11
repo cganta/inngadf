@@ -3,7 +3,10 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SqlServerOnprem",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBName": "PRXL"
+			}
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
