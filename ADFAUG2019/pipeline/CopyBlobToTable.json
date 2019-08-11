@@ -87,8 +87,87 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Stored Procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CopyBlobToTable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[USP_Insert_Users_Blobs_Log]",
+					"storedProcedureParameters": {
+						"BlobName": {
+							"value": {
+								"value": "@pipeline().parameters.Pram_BlobName",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"FileSize": {
+							"value": {
+								"value": "@pipeline().parameters.Pram_BlobSize",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"ProcessedDate": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ProcessStatus": {
+							"value": {
+								"value": "'Success'",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"RowsRead": {
+							"value": {
+								"value": "@activity('CopyBlobToTable').output.rowsRead",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"RowsWriten": {
+							"value": {
+								"value": "@activity('CopyBlobToTable').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_azsqlpreprod",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
+		"parameters": {
+			"Pram_BlobName": {
+				"type": "string"
+			},
+			"Pram_BlobSize": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
