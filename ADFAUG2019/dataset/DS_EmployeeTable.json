@@ -1,0 +1,33 @@
+{
+	"name": "DS_EmployeeTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_azsqlpreprod",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Email",
+				"type": "varchar"
+			},
+			{
+				"name": "MobileNo",
+				"type": "varchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "varchar"
+			},
+			{
+				"name": "LastName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Users]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
