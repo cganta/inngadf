@@ -21,7 +21,8 @@
 					},
 					"fieldList": [
 						"exists",
-						"size"
+						"size",
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
