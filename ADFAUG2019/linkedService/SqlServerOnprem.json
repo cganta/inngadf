@@ -3,7 +3,7 @@
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"parameters": {
-			"DBName": {
+			"LS_Pram_DBName": {
 				"type": "String",
 				"defaultValue": "CMS"
 			}
@@ -11,8 +11,8 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=NJ10-LT-NBANDI;initial catalog=@{linkedService().DBName};user id=sa",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0ZDdkYjQ0OS04YTRjLTQyNmItOGU4Yi0xNzA3ZjJiNDVkNjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;data source=NJ10-LT-NBANDI;initial catalog=@{linkedService().LS_Pram_DBName};user id=sa",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5NTJmYTFhOS1jZmY5LTQ3NDItYjA4Yi1iZjY1N2FiM2UwZTciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "SelfHostedIntegrationRuntime",
