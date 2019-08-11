@@ -80,7 +80,13 @@
 							"inputs": [
 								{
 									"referenceName": "DS_tblCopyBlobList",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"DS_Pram_DBName": {
+											"value": "@pipeline().parameters.PL_Pram_DBName",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
@@ -100,6 +106,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"PL_Pram_DBName": {
+				"type": "string",
+				"defaultValue": "PRXL"
+			}
+		},
 		"annotations": []
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"

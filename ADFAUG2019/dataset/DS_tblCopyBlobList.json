@@ -5,7 +5,15 @@
 			"referenceName": "SqlServerOnprem",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"DBName": "PRXL"
+				"LS_Pram_DBName": {
+					"value": "@dataset().DS_Pram_DBName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"DS_Pram_DBName": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
