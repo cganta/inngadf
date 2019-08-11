@@ -2,11 +2,17 @@
 	"name": "SqlServerOnprem",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"DBName": {
+				"type": "String",
+				"defaultValue": "CMS"
+			}
+		},
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=NJ10-LT-NBANDI;initial catalog=CMS;user id=sa",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhMTlkNTYyNS02MmE1LTQ1ZmUtYWYwZi0xMDZiNTlhNTYxZDIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;data source=NJ10-LT-NBANDI;initial catalog=@{linkedService().DBName};user id=sa",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0ZDdkYjQ0OS04YTRjLTQyNmItOGU4Yi0xNzA3ZjJiNDVkNjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "SelfHostedIntegrationRuntime",
