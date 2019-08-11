@@ -115,7 +115,7 @@
 		"parameters": {
 			"PL_Pram_DBName": {
 				"type": "string",
-				"defaultValue": "PRXL"
+				"defaultValue": "CMS"
 			}
 		},
 		"annotations": []
