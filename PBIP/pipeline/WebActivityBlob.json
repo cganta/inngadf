@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"url": "https://login.microsoftonline.com/fef66f03-9a3c-4799-8e31-a8680f9dd0de/oauth2/token",
 					"method": "POST",
-					"body": "grant_type : client_credentials\nclient_id : e2cf6189-b16b-4c3f-8556-c0e7dc9aebaf\nclient_secret : FBjqP+z[?oNs]btXfvRSvXEx1UUHd232\nresource : https://storage.azure.com/"
+					"body": "{\n\"grant_type\" : \"client_credentials\"\n\"client_id\" : \"e2cf6189-b16b-4c3f-8556-c0e7dc9aebaf\"\n\"client_secret\" : \"FBjqP+z[?oNs]btXfvRSvXEx1UUHd232\"\n\"resource\" : \"https://storage.azure.com/\"\n}"
 				}
 			}
 		],
