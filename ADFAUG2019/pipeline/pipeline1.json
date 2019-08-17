@@ -36,7 +36,7 @@
 							"referenceName": "LS_storageaccipaug",
 							"type": "LinkedServiceReference"
 						},
-						"path": "CMSDB/ErrorFiles/ErrorInvoices.csv"
+						"path": "employeedata/CMSDB/ErrorFiles/"
 					},
 					"translator": {
 						"type": "TabularTranslator",
