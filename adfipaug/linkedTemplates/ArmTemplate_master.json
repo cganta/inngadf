@@ -23,6 +23,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/bd08fa83-e892-4ad3-9f1c-2940e77392c6/resourcegroups/RG-USEAST-DEMO-PRXL/providers/Microsoft.DataFactory/factories/adf2prxl/integrationruntimes/SelfHostedIntegrationRuntime1"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvalutipaug.vault.azure.net/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -50,17 +54,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"LS_azsqlpreprod_connectionString": {
-						"value": "[parameters('LS_azsqlpreprod_connectionString')]"
-					},
 					"LS_storageaccipaug_connectionString": {
 						"value": "[parameters('LS_storageaccipaug_connectionString')]"
+					},
+					"LS_azsqlpreprod_connectionString": {
+						"value": "[parameters('LS_azsqlpreprod_connectionString')]"
 					},
 					"SqlServerOnprem_connectionString": {
 						"value": "[parameters('SqlServerOnprem_connectionString')]"
 					},
 					"SelfHostedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('SelfHostedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},

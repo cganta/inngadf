@@ -17,6 +17,9 @@
 		"SelfHostedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/bd08fa83-e892-4ad3-9f1c-2940e77392c6/resourcegroups/RG-USEAST-DEMO-PRXL/providers/Microsoft.DataFactory/factories/adf2prxl/integrationruntimes/SelfHostedIntegrationRuntime1"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://keyvalutipaug.vault.azure.net/"
+		},
 		"containerUri": {
 			"value": ""
 		},

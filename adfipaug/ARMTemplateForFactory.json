@@ -22,6 +22,10 @@
 		"SelfHostedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/bd08fa83-e892-4ad3-9f1c-2940e77392c6/resourcegroups/RG-USEAST-DEMO-PRXL/providers/Microsoft.DataFactory/factories/adf2prxl/integrationruntimes/SelfHostedIntegrationRuntime1"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvalutipaug.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -978,10 +982,21 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('LS_azsqlpreprod_connectionString')]"
+					"connectionString": "[parameters('LS_azsqlpreprod_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "preprod",
+						"secretVersion": "96346e89c25d4f9991826680a484f1e2"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_storageaccipaug')]",
@@ -1101,6 +1116,19 @@
 				"[concat(variables('factoryId'), '/datasets/DS_blb_ChargeCode')]",
 				"[concat(variables('factoryId'), '/datasets/DS_Tbl_CMS_Invoices')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }

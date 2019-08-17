@@ -7,13 +7,13 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "adfipaug"
 		},
-		"LS_azsqlpreprod_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_azsqlpreprod'"
-		},
 		"LS_storageaccipaug_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_storageaccipaug'"
+		},
+		"LS_azsqlpreprod_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_azsqlpreprod'"
 		},
 		"SqlServerOnprem_connectionString": {
 			"type": "secureString",
@@ -22,25 +22,16 @@
 		"SelfHostedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/bd08fa83-e892-4ad3-9f1c-2940e77392c6/resourcegroups/RG-USEAST-DEMO-PRXL/providers/Microsoft.DataFactory/factories/adf2prxl/integrationruntimes/SelfHostedIntegrationRuntime1"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvalutipaug.vault.azure.net/"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_azsqlpreprod')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('LS_azsqlpreprod_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_storageaccipaug')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -65,6 +56,19 @@
 						"resourceId": "[parameters('SelfHostedIntegrationRuntime_properties_typeProperties_linkedInfo_resourceId')]",
 						"authorizationType": "Rbac"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -166,64 +170,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LS_storageaccipaug')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_EmployeeTable')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_azsqlpreprod",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Email",
-						"type": "varchar"
-					},
-					{
-						"name": "MobileNo",
-						"type": "varchar"
-					},
-					{
-						"name": "FirstName",
-						"type": "varchar"
-					},
-					{
-						"name": "LastName",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"tableName": "[[dbo].[Users]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_azsqlpreprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_Tbl_CMS_Invoices')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_azsqlpreprod",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Tbl_CMS_Invoices"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_azsqlpreprod')]"
 			]
 		},
 		{
@@ -357,6 +303,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_azsqlpreprod')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_azsqlpreprod_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "preprod",
+						"secretVersion": "96346e89c25d4f9991826680a484f1e2"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerOnprem')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -379,6 +349,106 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/SelfHostedIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_EmployeeTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_azsqlpreprod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Email",
+						"type": "varchar"
+					},
+					{
+						"name": "MobileNo",
+						"type": "varchar"
+					},
+					{
+						"name": "FirstName",
+						"type": "varchar"
+					},
+					{
+						"name": "LastName",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Users]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_azsqlpreprod')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Tbl_CMS_Invoices')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_azsqlpreprod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Tbl_CMS_Invoices"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_azsqlpreprod')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_tblCopyBlobList')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerOnprem",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"LS_Pram_DBName": {
+							"value": "@dataset().DS_Pram_DBName",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"DS_Pram_DBName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TableName",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "tblCopyBlobList"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerOnprem')]"
 			]
 		},
 		{
@@ -564,45 +634,132 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_tblCopyBlobList')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/CopyOnpremToBlob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SqlServerOnprem",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"LS_Pram_DBName": {
-							"value": "@dataset().DS_Pram_DBName",
-							"type": "Expression"
-						}
-					}
-				},
-				"parameters": {
-					"DS_Pram_DBName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
+				"activities": [
 					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
+						"name": "Lookup1",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select * from tblCopyBlobList"
+							},
+							"dataset": {
+								"referenceName": "DS_tblCopyBlobList",
+								"type": "DatasetReference",
+								"parameters": {
+									"DS_Pram_DBName": {
+										"value": "@pipeline().parameters.PL_Pram_DBName",
+										"type": "Expression"
+									}
+								}
+							},
+							"firstRowOnly": false
+						}
 					},
 					{
-						"name": "TableName",
-						"type": "varchar"
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup1').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy Data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderQuery": {
+												"value": "@concat('select top 10 * from ',item().TableName)",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobStorageWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".csv"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "DS_tblCopyBlobList",
+											"type": "DatasetReference",
+											"parameters": {
+												"DS_Pram_DBName": {
+													"value": "@pipeline().parameters.PL_Pram_DBName",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DS_CMSDBBlobs",
+											"type": "DatasetReference",
+											"parameters": {
+												"FileName": {
+													"value": "@{item().TableName}.csv",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
 					}
 				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "tblCopyBlobList"
-				}
+				"parameters": {
+					"PL_Pram_DBName": {
+						"type": "string",
+						"defaultValue": "CMS"
+					}
+				},
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SqlServerOnprem')]"
+				"[concat(variables('factoryId'), '/datasets/DS_tblCopyBlobList')]",
+				"[concat(variables('factoryId'), '/datasets/DS_CMSDBBlobs')]"
 			]
 		},
 		{
@@ -931,135 +1088,6 @@
 				"[concat(variables('factoryId'), '/datasets/DS_EmployeeTable')]",
 				"[concat(variables('factoryId'), '/pipelines/CopyBlobToTable')]",
 				"[concat(variables('factoryId'), '/linkedServices/LS_azsqlpreprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyOnpremToBlob')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Lookup1",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "select * from tblCopyBlobList"
-							},
-							"dataset": {
-								"referenceName": "DS_tblCopyBlobList",
-								"type": "DatasetReference",
-								"parameters": {
-									"DS_Pram_DBName": {
-										"value": "@pipeline().parameters.PL_Pram_DBName",
-										"type": "Expression"
-									}
-								}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Lookup1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Lookup1').output.value",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Copy Data1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SqlServerSource",
-											"sqlReaderQuery": {
-												"value": "@concat('select top 10 * from ',item().TableName)",
-												"type": "Expression"
-											}
-										},
-										"sink": {
-											"type": "DelimitedTextSink",
-											"storeSettings": {
-												"type": "AzureBlobStorageWriteSettings"
-											},
-											"formatSettings": {
-												"type": "DelimitedTextWriteSettings",
-												"quoteAllText": true,
-												"fileExtension": ".csv"
-											}
-										},
-										"enableStaging": false
-									},
-									"inputs": [
-										{
-											"referenceName": "DS_tblCopyBlobList",
-											"type": "DatasetReference",
-											"parameters": {
-												"DS_Pram_DBName": {
-													"value": "@pipeline().parameters.PL_Pram_DBName",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "DS_CMSDBBlobs",
-											"type": "DatasetReference",
-											"parameters": {
-												"FileName": {
-													"value": "@{item().TableName}.csv",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"parameters": {
-					"PL_Pram_DBName": {
-						"type": "string",
-						"defaultValue": "CMS"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_tblCopyBlobList')]",
-				"[concat(variables('factoryId'), '/datasets/DS_CMSDBBlobs')]"
 			]
 		},
 		{
