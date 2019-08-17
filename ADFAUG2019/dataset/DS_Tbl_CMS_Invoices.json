@@ -1,0 +1,16 @@
+{
+	"name": "DS_Tbl_CMS_Invoices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_azsqlpreprod",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Tbl_CMS_Invoices"
+		}
+	}
+}

@@ -1,0 +1,49 @@
+{
+	"name": "DS_blb_Invoices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_storageaccipaug",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Invoices.csv",
+				"folderPath": "CMSDB",
+				"container": "employeedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "BranchKey",
+				"type": "String"
+			},
+			{
+				"name": "ChargeKey",
+				"type": "String"
+			},
+			{
+				"name": "DateKey",
+				"type": "String"
+			},
+			{
+				"name": "InvoiceNo",
+				"type": "String"
+			},
+			{
+				"name": "InvoiceAmt",
+				"type": "String"
+			},
+			{
+				"name": "DaysToBill",
+				"type": "String"
+			}
+		]
+	}
+}

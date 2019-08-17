@@ -1,0 +1,33 @@
+{
+	"name": "DS_blb_ChargeCode",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_storageaccipaug",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ChargeCode.csv",
+				"folderPath": "CMSDB",
+				"container": "employeedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ChargeKey",
+				"type": "String"
+			},
+			{
+				"name": "ChargeCode",
+				"type": "String"
+			}
+		]
+	}
+}

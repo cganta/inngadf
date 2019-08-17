@@ -1,0 +1,55 @@
+{
+	"name": "DF_CMS_Invoices_Agg",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_blb_Invoices",
+						"type": "DatasetReference"
+					},
+					"name": "Invoice"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_blb_BranchLocation",
+						"type": "DatasetReference"
+					},
+					"name": "BranchLocation"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_blb_ChargeCode",
+						"type": "DatasetReference"
+					},
+					"name": "ChargeCode"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Tbl_CMS_Invoices",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "Window1"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\tBranchKey as string,\n\t\tChargeKey as string,\n\t\tDateKey as string,\n\t\tInvoiceNo as string,\n\t\tInvoiceAmt as string,\n\t\tDaysToBill as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Invoice\nsource(output(\n\t\tBranchKey as string,\n\t\tBranchLocation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> BranchLocation\nsource(output(\n\t\tChargeKey as string,\n\t\tChargeCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ChargeCode\nInvoice, BranchLocation join(Invoice@BranchKey == BranchLocation@BranchKey,\n\tjoinType:'left',\n\tbroadcast: 'none')~> Join1\nJoin1, ChargeCode join(Invoice@ChargeKey == ChargeCode@ChargeKey,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> Join2\nJoin2 window(over(BranchLocation),\n\tTotalInvoiceAmt = sum(toInteger(InvoiceAmt))) ~> Window1\nWindow1 select(mapColumn(\n\t\tBranchKey = Invoice@BranchKey,\n\t\tChargeKey = Invoice@ChargeKey,\n\t\tDateKey,\n\t\tInvoiceNo,\n\t\tInvoiceAmt,\n\t\tDaysToBill,\n\t\tBranchLocation,\n\t\tChargeCode,\n\t\tTotalInvoiceAmt\n\t)) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'table',\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false) ~> sink1"
+		}
+	}
+}

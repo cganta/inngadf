@@ -1,0 +1,33 @@
+{
+	"name": "DS_blb_BranchLocation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_storageaccipaug",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "BranchLocation.csv",
+				"folderPath": "CMSDB",
+				"container": "employeedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "BranchKey",
+				"type": "String"
+			},
+			{
+				"name": "BranchLocation",
+				"type": "String"
+			}
+		]
+	}
+}
