@@ -1,0 +1,148 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyInvoiceBLob",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table Tbl_CMS_Invoices"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "BranchKey",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BranchKey",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ChargeKey",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ChargeKey",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DateKey",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DateKey",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "InvoiceNo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "InvoiceNo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "InvoiceAmt",
+									"type": "String"
+								},
+								"sink": {
+									"name": "InvoiceAmt",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "DaysToBill",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DaysToBill",
+									"type": "Int32"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_blb_Invoices",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Tbl_CMS_Invoices",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "CopyInvoiceBLob",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-09.eastus.logic.azure.com:443/workflows/be6eb9b7df524defbe58a50c39c71433/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6uUp7Wi3OCiFlh59usfSIZbTiQZdFx2P3kuhuXpSMac",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"ToList": {
+				"type": "string",
+				"defaultValue": "nagarjuna02@gmail.com"
+			}
+		},
+		"annotations": []
+	}
+}
