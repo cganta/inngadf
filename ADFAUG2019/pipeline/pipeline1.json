@@ -30,6 +30,14 @@
 						"preCopyScript": "truncate table Tbl_CMS_Invoices"
 					},
 					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"redirectIncompatibleRowSettings": {
+						"linkedServiceName": {
+							"referenceName": "LS_storageaccipaug",
+							"type": "LinkedServiceReference"
+						},
+						"path": "CMSDB/ErrorFiles/ErrorInvoices.csv"
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
@@ -133,6 +141,10 @@
 					"method": "POST",
 					"headers": {
 						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "{\n\t\"ErrorMessage\":\"@{activity('CopyInvoiceBLob').error.message}\",\n\t\"ADFName\":\"@{pipeline().DataFactory}\",\n\t\"PipelineName\":\"@{pipeline().Pipeline}\",\n\t\"ToList\":\"@{pipeline().parameters.ToList}\"\n}",
+						"type": "Expression"
 					}
 				}
 			}
