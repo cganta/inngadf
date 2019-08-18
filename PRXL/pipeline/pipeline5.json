@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"packageLocation": {
-						"packagePath": "ADFAug2019/SSISAug2019/LoadAzureSQL.dtsx",
+						"packagePath": "ADFAug2019/SSISAug2019/UploadBlob.dtsx",
 						"type": "SSISDB"
 					},
 					"environmentPath": null,
