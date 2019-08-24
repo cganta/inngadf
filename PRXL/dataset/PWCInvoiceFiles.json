@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "PWC_Invoices_Sample.tsv",
 				"folderPath": "PWCInvoices",
 				"container": "blobcntnrinvoices"
 			},
