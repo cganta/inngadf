@@ -1,0 +1,37 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-USEAST-DEV-PBIP"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeAnalytics",
+				"typeProperties": {
+					"accountName": "adlapbip",
+					"servicePrincipalId": "3aa47b98-9d05-46c8-961a-1ba105433745",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "fef66f03-9a3c-4799-8e31-a8680f9dd0de",
+					"subscriptionId": "bd08fa83-e892-4ad3-9f1c-2940e77392c6",
+					"resourceGroupName": "RG-USEAST-DEV-PBIP"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
