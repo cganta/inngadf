@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureDataLakeStoreLocation",
-				"folderPath": "Invoices"
+				"folderPath": "Invoices2"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
