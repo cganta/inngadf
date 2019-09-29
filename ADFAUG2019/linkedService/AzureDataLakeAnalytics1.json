@@ -1,0 +1,16 @@
+{
+	"name": "AzureDataLakeAnalytics1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeAnalytics",
+		"typeProperties": {
+			"accountName": "adlapbip",
+			"servicePrincipalId": "d8c82218-12c1-4703-86b8-ec53f40000a5",
+			"tenant": "fef66f03-9a3c-4799-8e31-a8680f9dd0de",
+			"subscriptionId": "bd08fa83-e892-4ad3-9f1c-2940e77392c6",
+			"resourceGroupName": "RG-USEAST-DEV-PBIP",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERklQQVVHX2YxNjgzZjg2LWExOWEtNDJlMi04MWJmLTRhN2EzZWJiZDUyZiINCn0="
+		}
+	}
+}
