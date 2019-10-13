@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "powershell -File CreateFile.ps1",
+					"command": "powershell -File PauseDWH_Script.ps1",
 					"resourceLinkedService": {
 						"referenceName": "LS_storageaccipaug",
 						"type": "LinkedServiceReference"
