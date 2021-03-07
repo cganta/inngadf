@@ -1,0 +1,25 @@
+{
+	"name": "ds_sql_clearedcargo_dynamic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_cargodb",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

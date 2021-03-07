@@ -1,0 +1,12 @@
+{
+	"name": "IntellipaatADF",
+	"properties": {
+		"globalParameters": {
+			"gpfilename": {
+				"type": "string",
+				"value": "test"
+			}
+		}
+	},
+	"location": "EastUS"
+}

@@ -1,0 +1,28 @@
+{
+	"name": "trg_blobcreated",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"filename": "@triggerBody().fileName",
+					"containername": "@triggerBody().folderPath"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/ltlorderspoc/blobs/Trips",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/78ef5d72-f2fc-48c4-90f4-9208b5e7494c/resourceGroups/RG-USW-INTP-DP200/providers/Microsoft.Storage/storageAccounts/presalesstoreageaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

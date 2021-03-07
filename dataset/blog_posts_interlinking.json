@@ -1,0 +1,39 @@
+{
+	"name": "blog_posts_interlinking",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlCRMReporting",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "post_title",
+				"type": "text"
+			},
+			{
+				"name": "post_name",
+				"type": "varchar"
+			},
+			{
+				"name": "pinged",
+				"type": "text"
+			},
+			{
+				"name": "post_content",
+				"type": "text"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "blog_posts_interlinking"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

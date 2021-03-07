@@ -1,0 +1,16 @@
+{
+	"name": "mysql_ip_posts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MySqlBlogInterlinking",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`fpp7vnh3_posts`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

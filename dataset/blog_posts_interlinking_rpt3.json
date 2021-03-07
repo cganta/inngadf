@@ -1,0 +1,17 @@
+{
+	"name": "blog_posts_interlinking_rpt3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlCRMReporting",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "blog_posts_interlinking"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

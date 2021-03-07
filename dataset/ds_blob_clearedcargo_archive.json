@@ -1,0 +1,113 @@
+{
+	"name": "ds_blob_clearedcargo_archive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_datalakestg_warehousecargo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Archive",
+				"fileSystem": "clearedcargo"
+			},
+			"columnDelimiter": "\t",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CSD_CODE",
+				"type": "String"
+			},
+			{
+				"name": "FILE_NO",
+				"type": "String"
+			},
+			{
+				"name": "LOT_NO",
+				"type": "String"
+			},
+			{
+				"name": "OCEAN_AIR",
+				"type": "String"
+			},
+			{
+				"name": "CUST_CODE",
+				"type": "String"
+			},
+			{
+				"name": "STRIP_DATE",
+				"type": "String"
+			},
+			{
+				"name": "HOLD",
+				"type": "String"
+			},
+			{
+				"name": "DAD",
+				"type": "String"
+			},
+			{
+				"name": "RECEIVED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "CONTAINER",
+				"type": "String"
+			},
+			{
+				"name": "PCS",
+				"type": "String"
+			},
+			{
+				"name": "POUNDS",
+				"type": "String"
+			},
+			{
+				"name": "CUBE",
+				"type": "String"
+			},
+			{
+				"name": "PICKUP_DATE",
+				"type": "String"
+			},
+			{
+				"name": "HOUSE_REF_NO",
+				"type": "String"
+			},
+			{
+				"name": "COMMODITY1",
+				"type": "String"
+			},
+			{
+				"name": "STATE",
+				"type": "String"
+			},
+			{
+				"name": "ZIP_CNTY",
+				"type": "String"
+			},
+			{
+				"name": "CONSIGNEE",
+				"type": "String"
+			},
+			{
+				"name": "STATUS",
+				"type": "String"
+			},
+			{
+				"name": "TRANSFER_YN",
+				"type": "String"
+			},
+			{
+				"name": "RELEASEFD_YN",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

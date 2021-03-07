@@ -1,0 +1,6 @@
+{
+	"name": "IntegrationRuntime-NagLocal",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

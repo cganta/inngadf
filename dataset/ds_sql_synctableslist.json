@@ -1,0 +1,33 @@
+{
+	"name": "ds_sql_synctableslist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_cargodb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TableName",
+				"type": "varchar"
+			},
+			{
+				"name": "DeltaLoad",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ConfigSyncTables"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
